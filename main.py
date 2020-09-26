@@ -115,30 +115,32 @@ def handle_message(event):
                     i[1].strftime("%H:%M") + "着\n"
             line_bot_api.reply_message(
                 event.reply_token,
-                ButtonsTemplate(
-                    actions=[
-                        PostbackTemplateAction(
-                            label=ret[0][0].strftime(
-                                "%H:%M") + "発 " + ret[0][1].strftime("%H:%M") + "着"
-                        ),
-                        PostbackTemplateAction(
-                            label=ret[1][0].strftime(
-                                "%H:%M") + "発 " + ret[1][1].strftime("%H:%M") + "着"
-                        ),
+                messages=TemplateSendMessage(
+                    template=ButtonsTemplate(
+                        actions=[
+                            PostbackTemplateAction(
+                                label=ret[0][0].strftime(
+                                    "%H:%M") + "発 " + ret[0][1].strftime("%H:%M") + "着"
+                            ),
+                            PostbackTemplateAction(
+                                label=ret[1][0].strftime(
+                                    "%H:%M") + "発 " + ret[1][1].strftime("%H:%M") + "着"
+                            ),
 
-                        PostbackTemplateAction(
-                            label=ret[2][0].strftime(
-                                "%H:%M") + "発 " + ret[2][1].strftime("%H:%M") + "着"
-                        ),
-                        PostbackTemplateAction(
-                            label=ret[3][0].strftime(
-                                "%H:%M") + "発 " + ret[3][1].strftime("%H:%M") + "着"
-                        ),
-                        PostbackTemplateAction(
-                            label=ret[4][0].strftime(
-                                "%H:%M") + "発 " + ret[4][1].strftime("%H:%M") + "着"
-                        )
-                    ]
+                            PostbackTemplateAction(
+                                label=ret[2][0].strftime(
+                                    "%H:%M") + "発 " + ret[2][1].strftime("%H:%M") + "着"
+                            ),
+                            PostbackTemplateAction(
+                                label=ret[3][0].strftime(
+                                    "%H:%M") + "発 " + ret[3][1].strftime("%H:%M") + "着"
+                            ),
+                            PostbackTemplateAction(
+                                label=ret[4][0].strftime(
+                                    "%H:%M") + "発 " + ret[4][1].strftime("%H:%M") + "着"
+                            )
+                        ]
+                    )
                 )
             )
         else:
