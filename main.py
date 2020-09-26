@@ -137,10 +137,6 @@ def handle_message(event):
                             PostbackTemplateAction(
                                 label=ret[3][0].strftime(
                                     "%H:%M") + "発 " + ret[3][1].strftime("%H:%M") + "着"
-                            ),
-                            PostbackTemplateAction(
-                                label=ret[4][0].strftime(
-                                    "%H:%M") + "発 " + ret[4][1].strftime("%H:%M") + "着"
                             )
                         ]
                     )
