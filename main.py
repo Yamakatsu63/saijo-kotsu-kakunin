@@ -107,12 +107,12 @@ def handle_message(event):
             sql = "SELECT arrival_time FROM jikokuhyou WHERE departure_time > '" + \
                 m.group(0)+"' limit 5;"
             c.execute(sql)
-            ret = c.fetchall()
-            for i in ret:
+            # ret = c.fetchall()
+            for i in c:
                 # str = ''.join(i)_
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=type(i))
+                    TextSendMessage(text=i)
                 )
         else:
             line_bot_api.reply_message(
