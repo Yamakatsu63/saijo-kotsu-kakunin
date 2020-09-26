@@ -109,10 +109,10 @@ def handle_message(event):
             c.execute(sql)
             ret = c.fetchall()
             for i in ret:
-                str = ''.join(i)
+                # str = ''.join(i)_
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=str)
+                    TextSendMessage(text=type(i))
                 )
         else:
             line_bot_api.reply_message(
