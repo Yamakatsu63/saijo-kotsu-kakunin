@@ -112,7 +112,9 @@ def handle_message(event):
 
             str = ""
             for i in ret:
-                str += i[0].strftime("%H:%M") + "¥n"
+                str += i[0].strftime("%H:%M")
+                print(str)
+
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=i[0].strftime("%H:%M"))
