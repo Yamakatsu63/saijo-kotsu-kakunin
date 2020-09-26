@@ -97,14 +97,20 @@ def handle_message(event):
         m = re.match(r'^([01][0-9]|2[0-3]):[0-5][0-9]$', event.message.text)
         conn = psycopg2.connect(DATABASE_URL)
         c = conn.cursor()
-        sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
-        c.execute(sql)
-        ret = c.fetchall()
-        for i in ret:
+        if m != None:
+            sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
+            c.execute(sql)
+            ret = c.fetchall()
+            for i in ret:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=i)
+                )
+        else :
             line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=i)
-            )
+                    event.reply_token,
+                    TextSendMessage(text="not match")
+                )
         # try:
         #     m = re.match(r'^([01][0-9]|2[0-3]):[0-5][0-9]$', event.message.text)
         #     conn = psycopg2.connect(DATABASE_URL)
