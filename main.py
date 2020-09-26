@@ -104,7 +104,7 @@ def handle_message(event):
         conn = psycopg2.connect(DATABASE_URL)
         c = conn.cursor()
         if m != None:
-            sql = "SELECT arrival_time FROM jikokuhyou WHERE departure_time > '" + \
+            sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '" + \
                 m.group(0)+"' limit 5;"
             c.execute(sql)
             ret = c.fetchall()
@@ -112,9 +112,8 @@ def handle_message(event):
 
             str = ""
             for i in ret:
-                str += i[0].strftime("%H:%M") + "\n"
-                print(str)
-
+                str += i[0].strftime("%H:%M") + " : " + \
+                    i[1].strftime("%H:%M") + "\n"
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=str)
