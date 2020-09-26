@@ -117,7 +117,7 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 messages=TemplateSendMessage(
-                    alt_text="button template",
+                    alt_text="時刻検索結果",
                     template=ButtonsTemplate(
                         text="バス時刻表検索",
                         actions=[
