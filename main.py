@@ -104,7 +104,7 @@ def handle_message(event):
             for i in ret:
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=i)
+                    TextSendMessage(text=i.strftime("%H:%M"))
                 )
         else :
             line_bot_api.reply_message(
