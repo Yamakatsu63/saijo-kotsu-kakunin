@@ -94,24 +94,35 @@ def handle_message(event):
         )
     else:
         # 出発時間が送られたら5件出力する
-        try:
-            m = re.match(r'^([01][0-9]|2[0-3]):[0-5][0-9]$', event.message.text)
-            conn = psycopg2.connect(DATABASE_URL)
-            c = conn.cursor()
-            sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
-            c.execute(sql)
-            ret = c.fetchall()
-            for i in ret:
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=i)
-                )
-        except:
-            # その他の文字だったらオウム返し
+        m = re.match(r'^([01][0-9]|2[0-3]):[0-5][0-9]$', event.message.text)
+        conn = psycopg2.connect(DATABASE_URL)
+        c = conn.cursor()
+        sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
+        c.execute(sql)
+        ret = c.fetchall()
+        for i in ret:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=event.message.text)
+                TextSendMessage(text=i)
             )
+        # try:
+        #     m = re.match(r'^([01][0-9]|2[0-3]):[0-5][0-9]$', event.message.text)
+        #     conn = psycopg2.connect(DATABASE_URL)
+        #     c = conn.cursor()
+        #     sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
+        #     c.execute(sql)
+        #     ret = c.fetchall()
+        #     for i in ret:
+        #         line_bot_api.reply_message(
+        #             event.reply_token,
+        #             TextSendMessage(text=i)
+        #         )
+        # except:
+        #     # その他の文字だったらオウム返し
+        #     line_bot_api.reply_message(
+        #         event.reply_token,
+        #         TextSendMessage(text=event.message.text)
+        #     )
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT"))
