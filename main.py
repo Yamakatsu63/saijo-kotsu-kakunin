@@ -110,13 +110,14 @@ def handle_message(event):
             c.execute(sql)
             ret = c.fetchall()
 
-            str = ""
-            for i in ret:
-                str += i[0].strftime("%H:%M") + "発 " + \
-                    i[1].strftime("%H:%M") + "着\n"
+            # str = ""
+            # for i in ret:
+            #     str += i[0].strftime("%H:%M") + "発 " + \
+            #         i[1].strftime("%H:%M") + "着\n"
             line_bot_api.reply_message(
                 event.reply_token,
                 messages=TemplateSendMessage(
+                    alt_text="button template",
                     template=ButtonsTemplate(
                         text="バス時刻表検索",
                         actions=[
