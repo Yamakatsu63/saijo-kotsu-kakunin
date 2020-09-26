@@ -108,12 +108,13 @@ def handle_message(event):
                 m.group(0)+"' limit 5;"
             c.execute(sql)
             # ret = c.fetchall()
+            print(len(c))
             for i in c:
                 print(i[0])
                 # str = ''.join(i)_
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=i[0].hour)
+                    TextSendMessage(text=i[0].strftime("%H:%M"))
                 )
         else:
             line_bot_api.reply_message(
