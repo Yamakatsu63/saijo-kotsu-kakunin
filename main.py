@@ -112,7 +112,7 @@ def handle_message(event):
 
             str = ""
             for i in ret:
-                str += i[0].strftime("%H:%M") + "¥n"
+                str += i[0].strftime("%H:%M") + "\n"
                 print(str)
 
             line_bot_api.reply_message(
