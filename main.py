@@ -98,7 +98,7 @@ def handle_message(event):
         conn = psycopg2.connect(DATABASE_URL)
         c = conn.cursor()
         if m != None:
-            sql = "SELECT departure_time, arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
+            sql = "SELECT arrival_time FROM jikokuhyou WHERE departure_time > '"+m.group(0)+"' limit 5;"
             c.execute(sql)
             ret = c.fetchall()
             for i in ret:
