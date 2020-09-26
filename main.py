@@ -112,7 +112,7 @@ def handle_message(event):
                 str = ''.join(i)
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=str.strftime("%H:%M"))
+                    TextSendMessage(text=str)
                 )
         else:
             line_bot_api.reply_message(
